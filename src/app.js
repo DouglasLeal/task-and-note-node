@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 import db from "./config/dbConnect.js";
 import routes from "./routes/index.js";
@@ -9,6 +10,18 @@ db.once("open", () => {
 });
 
 const app = express();
+
+const corsOptions = {
+    exposedHeaders: ['token']
+};
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header("Acess-Control-Allow-Origin", "*");
+    res.header("Acess-Control-Allow-Headers", true);
+    res.header("Acess-Control-Allow-Credentials", "Content-Type");
+    res.header("Acess-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    next();
+});
 
 routes(app);
 
