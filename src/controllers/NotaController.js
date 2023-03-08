@@ -25,6 +25,7 @@ class NotaController{
             let nota = await Repository.criar(req.body);
             res.status(201).json(nota);
         } catch (error) {
+            console.log(error)
             res.status(500).json({msg: error.message});
         }
     }
