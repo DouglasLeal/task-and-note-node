@@ -11,6 +11,11 @@ class UsuarioRepository{
         return usuario;
     }
 
+    static async buscarPorEmail(email){
+        let usuario = await Usuario.findOne({email});
+        return usuario;
+    }
+
     static async criar(dados){
         let novoUsuario = new Usuario(dados);
         return await novoUsuario.save();
