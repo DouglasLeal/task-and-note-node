@@ -25,7 +25,7 @@ class UsuarioController
 
     static async criar(req, res){
         try {
-            let usuarioCadastrado = Repository.buscarPorEmail(req.body.email);
+            let usuarioCadastrado = await Repository.buscarPorEmail(req.body.email);
 
             if(usuarioCadastrado){
                 return res.status(400).json({msg: "E-mail já cadastrado."});
