@@ -7,5 +7,6 @@ const router = express.Router();
 router
     .get("/", Controller.listar)
     .post("/registrar", Controller.criar)
+    .post("/login", Controller.login)
 
 export default router;
