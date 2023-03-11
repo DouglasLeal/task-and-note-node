@@ -3,6 +3,7 @@ import cors from "cors";
 
 import db from "./config/dbConnect.js";
 import routes from "./routes/index.js";
+import HandleErrorMiddleware from "./middlewares/HandleErrorMiddleware.js";
 
 db.on("error", console.log.bind(console, "DB - Erro ao conectar."))
 db.once("open", () => {
@@ -24,5 +25,7 @@ app.use((req, res, next) => {
 });
 
 routes(app);
+
+app.use(HandleErrorMiddleware.handle);
 
 export default app;
