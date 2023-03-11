@@ -1,12 +1,13 @@
 import express from "express";
 
 import Controller from "../controllers/UsuarioController.js";
+import validation from "../validations/usuarioValidation.js";
 
 const router = express.Router();
 
 router
     .get("/", Controller.listar)
-    .post("/registrar", Controller.criar)
-    .post("/login", Controller.login)
+    .post("/registrar", validation, Controller.criar)
+    .post("/login", validation, Controller.login)
 
 export default router;
