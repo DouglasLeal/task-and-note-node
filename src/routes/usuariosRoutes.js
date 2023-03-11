@@ -6,7 +6,6 @@ import validation from "../validations/usuarioValidation.js";
 const router = express.Router();
 
 router
-    .get("/", Controller.listar)
     .post("/registrar", validation, Controller.criar)
     .post("/login", validation, Controller.login)
 

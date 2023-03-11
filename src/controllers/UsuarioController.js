@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import Repository from "../repositories/UsuarioRepository.js";
 
@@ -69,9 +70,19 @@ class UsuarioController {
 
         let senhaCorreta = bcrypt.compareSync(senha, usuarioCadastrado.senha);
 
-        if(!senhaCorreta) return res.status(400).json({ msg: "E-mail não encontrado." });
+        if(!senhaCorreta) return res.status(400).json({ msg: "Senha incorreta." });
 
-        res.status(200).json({ msg: "Login realizado com sucesso" });
+        const token = jwt.sign({
+            id: usuarioCadastrado._id,
+            email: usuarioCadastrado.email
+        },
+            process.env.SECRET,
+            {expiresIn: "7d"}
+        );
+
+        res.header('token', token);
+
+        res.status(200).json({ msg: "Login realizado com sucesso." });
     }
 }
 
